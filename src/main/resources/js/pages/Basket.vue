@@ -9,8 +9,18 @@
                             <v-list-item-title v-html="item.name"/>
                             <v-list-item-subtitle v-html="`${item.price} рублей`"/>
                         </v-list-item-content>
-                        <v-list-item-action>
-                            <v-btn text color="error" @click="updateBaskets({value:item, action:'remove'})">Удалить</v-btn>
+                        <v-list-item-action style="width: 200px">
+                            <v-row>
+                                <v-text-field v-model="item.purchaseCount" style="width: 20px">
+                                    <v-icon slot="prepend" color="red"
+                                            :disabled="item.purchaseCount === 0"
+                                            @click="remove(item)">remove</v-icon>
+                                    <v-icon slot="append" color="green"
+                                            :disabled="item.count === 0"
+                                            @click="add(item)">add</v-icon>
+                                </v-text-field>
+                                <v-btn text color="error" @click="updateBaskets({value:item, action:'remove'})">Удалить</v-btn>
+                            </v-row>
                         </v-list-item-action>
                     </v-list-item>
                 </v-list-item-group>
@@ -31,6 +41,14 @@
         methods: {
             ...mapActions(['getRemedyList']),
             ...mapMutations(['updateBaskets']),
+            remove(item) {
+                --item.purchaseCount;
+                ++item.count;
+            },
+            add(item) {
+                ++item.purchaseCount;
+                --item.count;
+            }
         },
         computed: {
             ...mapState(['baskets']),

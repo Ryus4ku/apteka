@@ -5,6 +5,13 @@
             <v-card-text>
                 <v-text-field v-model="remedy.name" label="Наименование"/>
                 <v-text-field v-model="remedy.price"  label="Цена"/>
+                <v-text-field v-model="remedy.count">
+                    <v-icon slot="prepend" color="red"
+                            :disabled="remedy.count === 0"
+                            @click="remedy.count--">remove</v-icon>
+                    <v-icon slot="append" color="green"
+                            @click="remedy.count++">add</v-icon>
+                </v-text-field>
             </v-card-text>
             <v-card-actions>
                 <v-spacer/>
@@ -27,7 +34,8 @@
                 bottomMenuValue: 0,
                 remedy: {
                     name: '',
-                    price: ''
+                    price: '',
+                    count: 0
                 }
             }
         },

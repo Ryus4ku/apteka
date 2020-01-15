@@ -9,11 +9,7 @@
             <template v-slot:default="{ items }">
                 <v-row>
                     <v-col v-for="item in items"
-                           :key="item.id"
-                           cols="4"
-                           sm="5"
-                           md="4"
-                           lg="3">
+                           :key="item.id" cols="4" sm="5" md="4" lg="3">
                         <v-card>
                             <v-card-title>
                                 <h4>{{ item.name }}</h4>
@@ -25,12 +21,27 @@
                                     <v-list-item-content v-if="item.price" class="align-end">{{ item.price }}</v-list-item-content>
                                     <v-list-item-content v-else class="align-end" style="color: red">Цена не указана</v-list-item-content>
                                 </v-list-item>
+                                <v-list-item>
+                                    <v-list-item-content>Кол-во:</v-list-item-content>
+                                    <v-list-item-content class="align-end"
+                                                         :style="{color: item.count > 0 ? 'blue' : 'red'}">
+                                        {{item.count}}
+                                    </v-list-item-content>
+                                </v-list-item>
                             </v-list>
                             <v-divider/>
                             <v-card-actions>
+                                <v-text-field v-model="item.purchaseCount" style="width: 20px">
+                                    <v-icon slot="prepend" color="red"
+                                            :disabled="item.purchaseCount === 0"
+                                            @click="remove(item)">remove</v-icon>
+                                    <v-icon slot="append" color="green"
+                                            :disabled="item.count === 0"
+                                            @click="add(item)">add</v-icon>
+                                </v-text-field>
                                 <v-spacer/>
                                 <v-btn v-if="!containBasket(item)" text color="success" @click="updateBaskets({value:item})">В корзину</v-btn>
-                                <v-btn v-else text color="error" @click="updateBaskets({value:item, action:'remove'})">Убрать из корзины</v-btn>
+                                <v-btn v-else text color="error" @click="updateBaskets({value:item, action:'remove'})">Убрать</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-col>
@@ -73,6 +84,9 @@
                     </v-btn>
                 </v-row>
             </template>
+            <template v-slot:no-data>
+                <v-row class="ma-0 align-center justify-center">Каталог пуст</v-row>
+            </template>
         </v-data-iterator>
     </v-card>
 </template>
@@ -93,7 +107,19 @@
             ...mapActions(['getRemedyList']),
             ...mapMutations(['updateBaskets']),
             async getList() {
-                this.remedyList = await this.getRemedyList();
+                const result = await this.getRemedyList();
+                this.remedyList = result.map(item => {
+                    item.purchaseCount = 0;
+                    return item;
+                });
+
+                this.baskets.forEach(basket => {
+                    const finded = this.remedyList.find(remedy => remedy.id === basket.id);
+                    if (finded) {
+                        finded.purchaseCount = basket.purchaseCount;
+                        finded.count = basket.count;
+                    }
+                })
             },
             nextPage () {
                 if (this.page + 1 <= this.numberOfPages) this.page += 1
@@ -106,6 +132,14 @@
             },
             containBasket(item) {
                 return !!this.baskets.find(({id}) => id === item.id)
+            },
+            remove(item) {
+                --item.purchaseCount;
+                ++item.count;
+            },
+            add(item) {
+                ++item.purchaseCount;
+                --item.count;
             }
         },
         computed: {

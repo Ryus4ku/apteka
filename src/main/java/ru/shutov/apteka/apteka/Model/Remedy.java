@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,5 +22,5 @@ public class Remedy {
     private String price;
 
     @OneToMany(mappedBy = "remedy", cascade = CascadeType.ALL)
-    private List<Offer> offers;
+    private List<Offer> offers = new ArrayList<>();
 }

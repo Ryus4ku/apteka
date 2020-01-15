@@ -2,6 +2,8 @@ package ru.shutov.apteka.apteka.Controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import ru.shutov.apteka.apteka.DTOs.RemedyDto;
 import ru.shutov.apteka.apteka.Services.RemedyService;
@@ -24,6 +26,7 @@ public class RemedyController {
     }
 
     @GetMapping("/list")
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
     public ResponseEntity<List<RemedyDto>> list() {
         return new ResponseEntity<>(remedyService.getList(), HttpStatus.OK);
     }

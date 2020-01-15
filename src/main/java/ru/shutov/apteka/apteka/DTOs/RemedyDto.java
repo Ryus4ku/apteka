@@ -15,4 +15,5 @@ public class RemedyDto {
     private Long id;
     private String name;
     private String price;
+    private int count;
 }
