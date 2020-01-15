@@ -61,6 +61,9 @@ const store = new Vuex.Store({
             if (!err) {
                 return await res.json();
             }
+        },
+        async initPurchase({}, purchase) {
+            await to(Vue.http.post('/basket/new', purchase));
         }
     }
 });

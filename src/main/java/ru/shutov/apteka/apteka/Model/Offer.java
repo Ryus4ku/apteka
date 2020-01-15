@@ -22,6 +22,8 @@ public class Offer {
     @JsonBackReference
     private Remedy remedy;
 
-    @OneToOne(mappedBy = "offer")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "purchase_id")
+    @JsonBackReference
     private Purchase purchase;
 }

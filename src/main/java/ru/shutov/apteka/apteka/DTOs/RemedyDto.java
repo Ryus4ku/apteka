@@ -16,4 +16,5 @@ public class RemedyDto {
     private String name;
     private String price;
     private int count;
+    private int purchaseCount;
 }

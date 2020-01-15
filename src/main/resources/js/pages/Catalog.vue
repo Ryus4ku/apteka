@@ -30,7 +30,7 @@
                                 </v-list-item>
                             </v-list>
                             <v-divider/>
-                            <v-card-actions>
+                            <v-card-actions v-if="context.authorized">
                                 <v-text-field v-model="item.purchaseCount" style="width: 20px">
                                     <v-icon slot="prepend" color="red"
                                             :disabled="item.purchaseCount === 0"
@@ -143,7 +143,7 @@
             }
         },
         computed: {
-            ...mapState(['baskets']),
+            ...mapState(['baskets', 'context']),
             numberOfPages() {
                 return Math.ceil(this.remedyList.length / this.itemsPerPage)
             },

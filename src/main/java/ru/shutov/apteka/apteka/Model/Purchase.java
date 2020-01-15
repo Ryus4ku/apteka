@@ -3,6 +3,9 @@ package ru.shutov.apteka.apteka.Model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,7 +19,11 @@ public class Purchase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "offer_id", referencedColumnName = "id")
-    private Offer offer;
+    @OneToMany(mappedBy = "purchase", cascade = CascadeType.ALL)
+    private List<Offer> offer = new ArrayList<>();
+
+    private String fio;
+    private String phoneNumber;
+    private String comment;
+    private BigDecimal totalPrice;
 }
