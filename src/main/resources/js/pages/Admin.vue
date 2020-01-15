@@ -5,7 +5,7 @@
             <v-card-text>
                 <v-text-field v-model="remedy.name" label="Наименование"/>
                 <v-text-field v-model="remedy.price"  label="Цена"/>
-                <v-text-field v-model="remedy.count">
+                <v-text-field v-model="remedy.count" label="Количество">
                     <v-icon slot="prepend" color="red"
                             :disabled="remedy.count === 0"
                             @click="remedy.count--">remove</v-icon>
