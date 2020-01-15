@@ -20,6 +20,11 @@
         },
         mounted() {
             this.getContext()
+        },
+        watch: {
+            '$route.path'(value) {
+                console.log(value)
+            }
         }
     }
 </script>

@@ -57,19 +57,19 @@
                     <v-spacer/>
 
                     <span class="mr-4 grey--text">
-                        Page {{ page }} of {{ numberOfPages }}
+                        Страница {{ page }} из {{ numberOfPages }}
                     </span>
                     <v-btn fab dark
                            color="blue darken-3"
                            class="mr-1"
                            @click="formerPage">
-                        <
+                        <v-icon>keyboard_arrow_left</v-icon>
                     </v-btn>
                     <v-btn fab dark
                            color="blue darken-3"
                            class="ml-1"
                            @click="nextPage">
-                        >
+                        <v-icon>keyboard_arrow_right</v-icon>
                     </v-btn>
                 </v-row>
             </template>

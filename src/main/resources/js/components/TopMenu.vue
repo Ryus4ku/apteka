@@ -11,8 +11,9 @@
                        @click="changeRoute('/')">Главная</v-btn>
                 <v-btn text large
                        @click="changeRoute('/catalog')">Каталог</v-btn>
-                <v-btn v-if="context.authorized"
-                       depressed text large @click="changeRoute('/basket')">Корзина</v-btn>
+
+                <v-btn v-if="context.authorized" depressed text large @click="changeRoute('/basket')">Корзина ({{baskets.length}})</v-btn>
+
 
                 <v-btn v-if="context.admin"
                        text large
@@ -34,7 +35,7 @@
             }
         },
         computed: {
-            ...mapState(['context']),
+            ...mapState(['context', 'baskets']),
         },
         methods: {
             ...mapActions(['logout']),

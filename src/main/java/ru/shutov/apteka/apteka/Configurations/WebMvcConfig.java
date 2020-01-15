@@ -21,7 +21,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     private String fileStoragePath;
 
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/login").setViewName("Log");
+        registry.addViewController("/login").setViewName("login");
     }
 
     @Bean

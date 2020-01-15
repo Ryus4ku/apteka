@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "PURCHASE")
+@Table(name = "purchase")
 public class Purchase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
