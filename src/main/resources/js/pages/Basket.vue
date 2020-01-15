@@ -124,14 +124,17 @@
             async goPurchase() {
                 const {fio, phoneNumber, comment, baskets} = this;
                 const purchase = {fio, phoneNumber, comment, baskets};
-                await this.initPurchase(purchase);
-                this.clearData()
+                const result = await this.initPurchase(purchase);
+                if (result) {
+                    this.clearData()
+                }
             },
             clearData() {
                 this.fio = '';
                 this.phoneNumber = '';
                 this.comment = '';
                 this.baskets = [];
+                this.dialog = false;
             }
         },
         computed: {

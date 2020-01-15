@@ -3,6 +3,9 @@
         <v-btn>
             <span>Добавить лекарства</span>
         </v-btn>
+        <v-btn>
+            <span>Список заказов</span>
+        </v-btn>
     </v-bottom-navigation>
 </template>
 
@@ -14,9 +17,9 @@
                 activeBtn: 0
             }
         },
-        methods: {
-            change() {
-                this.$emit('changeBottomMenu', this.activeBtn)
+        watch: {
+            activeBtn(value) {
+                this.$emit('changeBottomMenu', value)
             }
         }
     }

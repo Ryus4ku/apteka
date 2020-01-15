@@ -26,4 +26,5 @@ public class Purchase {
     private String phoneNumber;
     private String comment;
     private BigDecimal totalPrice;
+    private boolean actual;
 }

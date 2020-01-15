@@ -12,7 +12,8 @@ const store = new Vuex.Store({
             admin: false,
             authorized: false
         },
-        baskets: []
+        baskets: [],
+        purchases: []
     },
     getters: {},
     mutations: {
@@ -28,6 +29,13 @@ const store = new Vuex.Store({
                 const index = state.baskets.findIndex(({id}) => id === value.id);
                 state.baskets.splice(index, 1);
             }
+        },
+        updatePurchases(state) {
+            state.purchases.forEach(purchase => purchase.active = false)
+        },
+        removePurchase(state, item) {
+            const index = state.purchases.findIndex(purchase => purchase.id === item.id);
+            state.purchases.splice(index, 1);
         }
     },
     actions: {
@@ -64,6 +72,18 @@ const store = new Vuex.Store({
         },
         async initPurchase({}, purchase) {
             await to(Vue.http.post('/basket/new', purchase));
+        },
+        async getActualPurchases({commit, state}) {
+            const {err, res} = await to(Vue.http.get('/purchase/list'));
+            if (!err) {
+                state.purchases = await res.json();
+                commit('updatePurchases');
+                return true;
+            }
+        },
+        async closePurchase({commit}, item) {
+            await to(Vue.http.get(`/purchase/close/${item.id}`));
+            commit('removePurchase', item);
         }
     }
 });

@@ -45,8 +45,7 @@
             return {
                 user: {
                     username: '',
-                    password: '',
-                    repeatPassword: ''
+                    password: ''
                 },
                 showPass: false,
                 showRepeatPass: false,
@@ -62,6 +61,7 @@
                 if (this.user.username !== '' && this.user.password !== '') {
                     let form = document.getElementById('loginForm');
                     const formData = new FormData(form);
+                    console.log([form, formData]);
                     await this.login(formData);
                     await this.$router.push("/");
                     this.$router.go(0)

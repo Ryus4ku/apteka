@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import './api/resource'
-import 'vuetify/dist/vuetify.min.css'
 import '@babel/polyfill';
 import router from './router/router'
 import store from './store/mainStore'

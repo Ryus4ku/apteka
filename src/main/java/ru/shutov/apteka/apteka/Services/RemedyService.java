@@ -47,7 +47,7 @@ public class RemedyService {
                 .collect(Collectors.toList());
     }
 
-    private RemedyDto transformRemedy(Remedy remedy) {
+    public RemedyDto transformRemedy(Remedy remedy) {
         long count = remedy.getOffers().stream()
                 .filter(offer -> offer.getPurchase() == null)
                 .count();

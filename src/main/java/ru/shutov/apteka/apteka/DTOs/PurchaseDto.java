@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,4 +24,5 @@ public class PurchaseDto implements Serializable {
     private String fio;
     private String phoneNumber;
     private String comment;
+    private BigDecimal totalPrice;
 }

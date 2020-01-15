@@ -35,9 +35,6 @@ public class User implements Serializable, UserDetails {
     @Enumerated(EnumType.ORDINAL)
     private Set<Role> roles = new HashSet<>();
 
-    /**
-     * Подверждение электронной почты.
-     */
     @Column(nullable = false)
     private boolean active;
 

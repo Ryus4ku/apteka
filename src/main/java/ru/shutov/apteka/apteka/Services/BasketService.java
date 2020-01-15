@@ -41,6 +41,7 @@ public class BasketService {
                 .fio(purchase.getFio())
                 .phoneNumber(purchase.getPhoneNumber())
                 .comment(purchase.getComment())
+                .actual(true)
                 .build();
 
         BigDecimal totalPrice = BigDecimal.ZERO;
